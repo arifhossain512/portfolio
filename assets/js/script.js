@@ -1,4 +1,5 @@
-$(function () {
+
+document.addEventListener("DOMContentLoaded", function () {
     // Navigation 
 
     const siteNavigation = document.querySelector('.site-navigation');
@@ -319,9 +320,8 @@ $(function () {
 
     if (document.querySelectorAll('#grid').length > 0) {
         shuffleme.init();
-      }
-      
-}());
-document.addEventListener("DOMContentLoaded", function () {
+    }
+
+
     // Navigation
-  });
+});
