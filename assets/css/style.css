@@ -20,7 +20,13 @@ a:focus {
 
 /* LAYOUT
 ================================================== */
-
+:root{
+--primar-color1:#161BF0;
+--primar-color2:#1658FA;
+--primar-color3:#1F8AE4;
+--primar-color4:#16CFFA;
+--primar-color5:#16F0DE;
+}
 html,
 body {
   width: 100%;
@@ -275,7 +281,9 @@ body {
 .site-header {
   height: 60px;
 }
-
+.navbar-header{
+  height: 60px;
+}
 .site-logo {
   display: flex;
   position: relative;
@@ -331,15 +339,16 @@ body {
 /* Navigation */
 .site-navigation {
   background-color: #196fc2;
+  
 }
 
-.site-navigation.affix {
+.affix {
+  position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+
   width: 100%;
   height: inherit;
-  z-index: 1005;
+  z-index: 999;
 }
 
 .site-navigation .navbar-nav {
@@ -833,6 +842,7 @@ body {
 /*
  * Sections
  */
+
 .site-section {
   padding: 100px 0;
 }
@@ -937,6 +947,14 @@ body {
   }
 }
 
+/* ################################################### */
+
+
+
+
+
+
+
 /* Section: Hello */
 .section-hello .row {
   margin-top: 70px;
@@ -986,6 +1004,74 @@ body {
 .main-service p {
   margin: 25px 0 0;
   font-size: 12px;
+}
+
+/* ########################## */
+
+.site-section.section-hello {
+  background:var(--primar-color3);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.site-section h2 {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.site-section.section-subtitle {
+  font-style: italic;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 50px;
+}
+
+.site-section.section-subtitle span {
+  font-weight: 700;
+}
+
+.site-section.main-service {
+  margin-bottom: 25px;
+}
+
+.site-section.rectangle {
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  float: left;
+  margin-right: 10px;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  color: #b19a7f;
+  margin-top: 10px;
+}
+
+.site-section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.site-section p {
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.site-section.big-rectangle img {
+  width: 100%;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -1041,17 +1127,33 @@ body {
   }
 }
 
+
+
+
+
+/* ######################################### */
+
 /* Section: About */
+.section-about {
+  background-color: #f6f6f6;
+}
+
 .section-about .row {
   margin-top: 70px;
 }
 
 .section-about .col-sm-3 {
   min-height: 250px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 .section-about .rectangle {
   margin: 15px auto 10px;
+  border-radius: 10px;
+  background-color: #196fc2;
+  color: #fff;
+  padding: 20px;
 }
 
 .section-about .rectangle i {
@@ -1060,13 +1162,15 @@ body {
 
 .feature-about h3 {
   margin: 50px 0 0;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
+  color: #196fc2;
 }
 
 .feature-about p {
   margin: 30px 0 0;
+  font-size: 14px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -1098,17 +1202,22 @@ body {
   }
 }
 
-/* Section: Skills */
+/*  */
+
+
+
+/*Updated CSS*/
 .section-skills {
-  background-color: #f6f6f6;
+  background: linear-gradient(-45deg, #2196F3, #196fc2);
+  padding: 80px 0;
 }
 
 .section-skills h2 {
   position: relative;
   padding-bottom: 20px;
   margin-bottom: 40px;
-  font-size: 18px;
-  color: #000;
+  font-size: 24px;
+  color: #fff;
   text-transform: uppercase;
   text-align: left;
 }
@@ -1120,16 +1229,20 @@ body {
   display: block;
   width: 40px;
   height: 1px;
-  background-color: #000;
+  background-color: #FFF;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 .section-skills p {
   margin: 10px 0 0;
+  font-size: 16px;
+  color: #fff;
 }
 
 .progress-group p {
   margin: 0;
   text-transform: uppercase;
+  color: #fff;
 }
 
 .progress-group+.progress-group {
@@ -1140,16 +1253,26 @@ body {
   position: relative;
   margin: 10px 0 0;
   background-color: #666;
-  border-radius: 0;
-  height: 10px;
-  box-shadow: none;
+  color: #FFF;
+  border-radius: 25px;
+  height: 15px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
   overflow: visible;
 }
 
 .progress-bar {
   position: relative;
-  background-color: #196fc2;
-  height: 10px;
+  background-color: #2196F3;
+  height: 15px;
+}
+
+.progress-bar {
+  position: relative;
+  height: 15px;
+  background: #f6f6f6;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 .progress-bar:before {
@@ -1161,7 +1284,7 @@ body {
   height: 0;
   border-style: solid;
   border-width: 0 15px 20px 15px;
-  border-color: transparent transparent #196fc2 transparent;
+  border-color: transparent transparent #2196F3 transparent;
   z-index: 2;
 }
 
@@ -1179,11 +1302,13 @@ body {
 }
 
 .progress-bar span {
-  width: 40px !important;
+  width: 50px !important;
   position: absolute;
   top: -30px;
   right: -7px;
-  color: #000;
+  color: #2196F3;
+  font-weight: bold;
+  font-size: 14px;
   z-index: 3;
 }
 
@@ -1203,6 +1328,11 @@ body {
     font-size: 18px;
   }
 }
+
+
+/* ############################# */
+
+
 
 /* Section: Counters */
 .site-section.section-counters {
