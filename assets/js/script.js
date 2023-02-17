@@ -1,5 +1,53 @@
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    //   HEADER LEFT TO RIGHT ANIMATION
+
+    let languageList = document.getElementById('language-list');
+    let position = 0;
+    let animationId;
+
+    function moveList() {
+        console.log('moveList called');
+
+        position -= 2;
+        languageList.style.left = position + 'px';
+        if (position < -languageList.offsetWidth) {
+            // Move the first list item to the end of the list
+            languageList.appendChild(languageList.children[0]);
+            // Reset the position to the original value
+            position = 0;
+        }
+        animationId = requestAnimationFrame(moveList);
+    }
+
+
+    function startAnimation() {
+        if (!animationId) {
+            animationId = requestAnimationFrame(moveList);
+        }
+    }
+
+    function stopAnimation() {
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    }
+
+    languageList.addEventListener('mouseenter', stopAnimation);
+    languageList.addEventListener('mouseleave', startAnimation);
+
+    startAnimation();
+
+
+
+
+
+
+
+
+
     // Navigation 
 
     const siteNavigation = document.querySelector('.site-navigation');
@@ -38,68 +86,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-    //  for page scrolling feature
-    document.querySelectorAll('.page-scroll a').forEach(function (anchor) {
-        anchor.addEventListener('click', function (event) {
-            event.preventDefault();
-            let target = document.querySelector(anchor.getAttribute('href'));
-            let targetTop = target.offsetTop;
-            let currentTop = window.pageYOffset;
-            let step = (targetTop - currentTop) / 30;
-            let intervalId = setInterval(function () {
-                window.scrollBy(0, step);
-                if (Math.abs(window.pageYOffset - targetTop) < Math.abs(step)) {
-                    clearInterval(intervalId);
-                    window.scrollTo(0, targetTop);
-                }
-            }, 20);
-        });
-    });
-
-
-
-
-    // Counters
-    if (document.querySelectorAll('.counter-start').length > 0) {
-        const statItems = document.querySelectorAll('.counter-start');
-        statItems.forEach(statItem => {
-            const offset = statItem.offsetTop;
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > (offset - 1000) && !statItem.classList.contains('counting')) {
-                    statItem.classList.add('counting');
-                    // countTo function implementation is not included in the provided code
-                }
-            });
-        });
-    }
-
-
-
-    // // Progress bar 
-    // let $section = $('.section-skills');
-    // function loadDaBars() {
-    //     $('.progress .progress-bar').progressbar({
-    //         transition_delay: 500,
-    //         display_text: 'center'
-    //     });
-    // }
-    // Progress bar
     const section = document.querySelector('.section-skills');
+
 
     function loadDaBars() {
         const progressBars = document.querySelectorAll('.progress .progress-bar');
         progressBars.forEach(bar => {
-            bar.style.width = bar.dataset.width + '%';
+            bar.style.width = bar.dataset.transitiongoal + '%';
             bar.style.transitionDelay = '500ms';
 
             const displayText = document.createElement('span');
-            displayText.classList.add('progress-bar-text');
-            displayText.textContent = bar.dataset.width + '%';
+
+            displayText.textContent = bar.dataset.transitiongoal + '%';
             displayText.style.textAlign = 'center';
             bar.appendChild(displayText);
         });
     }
+
 
 
     document.addEventListener('scroll', function (ev) {
@@ -112,144 +115,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    //Team Carousel
-    const servicesCarousel = document.querySelector('#services-carousel');
-    if (servicesCarousel) {
-        servicesCarousel.setAttribute('data-interval', false);
-
-        // Carousel touch support
-        const carouselInner = document.querySelector('.carousel-inner');
-        if (carouselInner) {
-            let xDown, yDown;
-            carouselInner.addEventListener('touchstart', handleTouchStart);
-            carouselInner.addEventListener('touchmove', handleTouchMove);
-
-            function handleTouchStart(evt) {
-                xDown = evt.touches[0].clientX;
-                yDown = evt.touches[0].clientY;
-            }
-
-            function handleTouchMove(evt) {
-                const xUp = evt.touches[0].clientX;
-                const yUp = evt.touches[0].clientY;
-                const xDiff = xDown - xUp;
-                if (Math.abs(xDiff) > 50) {
-                    xDiff > 0 ? servicesCarousel.carousel('next') : servicesCarousel.carousel('prev');
-                }
-            }
-        }
-    }
-
-    // Slick.js   
-    $('.review-carousel').slick({
-        nextArrow: '<button class="slick rectangle slick-next"><i class="fa fa-angle-right" aria-hidden="true"></button>',
-        preletrow: '<button class="slick rectangle slick-prev"><i class="fa fa-angle-left" aria-hidden="true"></button>'
-    });
-
-    $('.clients-carousel').slick({
-        arrows: false,
-        slidesToShow: 5,
-        responsive: [{
-            breakpoint: 992,
-            settings: {
-                slidesToShow: 2
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1
-            }
-        }]
-    });
-
-    // //shuffle.js
-    // let shuffleme = (function ($) {
-    //     'use strict';
-    //     let $grid = $('#grid'), //locate what we want to sort 
-    //         $filterOptions = $('.portfolio-sorting li'),  //locate the filter categories
-
-    //         init = function () {
-
-    //             // None of these need to be executed synchronously
-    //             setTimeout(function () {
-    //                 listen();
-    //                 setupFilters();
-    //             }, 100);
-
-    //             // instantiate the plugin
-    //             $grid.shuffle({
-    //                 itemSelector: '[class*="col-"]',
-    //                 group: Shuffle.ALL_ITEMS,
-    //             });
-    //         },
 
 
-    //         // Set up button clicks
-    //         setupFilters = function () {
-    //             let $btns = $filterOptions.children();
-    //             $btns.on('click', function (e) {
-    //                 e.preventDefault();
-    //                 let $this = $(this),
-    //                     isActive = $this.hasClass('active'),
-    //                     group = isActive ? 'all' : $this.data('group');
-
-    //                 // Hide current label, show current label in title
-    //                 if (!isActive) {
-    //                     $('.portfolio-sorting li a').removeClass('active');
-    //                 }
-
-    //                 $this.toggleClass('active');
-
-    //                 // Filter elements
-    //                 $grid.shuffle('shuffle', group);
-    //             });
-
-    //             $btns = null;
-    //         },
-
-    //         // Re layout shuffle when images load. This is only needed
-    //         // below 768 pixels because the .picture-item height is auto and therefore
-    //         // the height of the picture-item is dependent on the image
-    //         // I recommend using imagesloaded to determine when an image is loaded
-    //         // but that doesn't support IE7
-    //         listen = function () {
-    //             let debouncedLayout = $.throttle(300, function () {
-    //                 $grid.shuffle('update');
-    //             });
-
-    //             // Get all images inside shuffle
-    //             $grid.find('img').each(function () {
-    //                 let proxyImage;
-
-    //                 // Image already loaded
-    //                 if (this.complete && this.naturalWidth !== undefined) {
-    //                     return;
-    //                 }
-
-    //                 // If none of the checks above matched, simulate loading on detached element.
-    //                 proxyImage = new Image();
-    //                 $(proxyImage).on('load', function () {
-    //                     $(this).off('load');
-    //                     debouncedLayout();
-    //                 });
-
-    //                 proxyImage.src = this.src;
-    //             });
-
-    //             // Because this method doesn't seem to be perfect.
-    //             setTimeout(function () {
-    //                 debouncedLayout();
-    //             }, 500);
-    //         };
-
-    //     return {
-    //         init: init
-    //     };
-    // }(jQuery));
 
 
-    // shuffle.js
+
+
     let shuffleme = (function () {
         'use strict';
         let grid = document.querySelector('#grid'),
@@ -323,5 +194,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // Navigation
+
 });
